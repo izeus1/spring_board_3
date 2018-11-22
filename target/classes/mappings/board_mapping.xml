@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+
+	<resultMap type="board" id="boardResult">
+		<id property="seq" column="seq" />
+		<result property="title" column="title" />
+		<result property="writer" column="writer" />
+		<result property="content" column="content" />
+		<result property="reg_date" column="reg_date" />
+		<result property="cnt" column="cnt" />
+		<result property="id" column="id" />
+	</resultMap>
+
+	<insert id="insert">
+		INSERT INTO BOARD VALUES (BOARD_seq.nextval, #{title}, #{writer}, #{content}, sysdate, 0, #{id})
+	</insert>
+
+	<update id="update">
+		UPDATE BOARD SET CONTENT = #{content}, REGDATE = SYSDATE
+		where seq = #{seq}
+	</update>
+	
+	<update id="update_cnt">
+		UPDATE BOARD SET cnt = cnt+1 where seq = #{seq}
+	</update>
+	
+
+	<select id="selectOne" resultMap="boardResult">
+		SELECT SEQ, TITLE, WRITER, CONTENT, to_char(regdate, 'yyyy-mm-dd hh:mi:ss') reg_date,
+		CNT, ID 
+		FROM BOARD WHERE seq = #{seq}
+	</select>
+
+
+	<delete id="delete">
+		DELETE from BOARD WHERE seq = #{seq}
+	</delete>
+	<!-- <select id="getList" resultType="BOARD"> SELECT no, name, content, 
+		password, to_char(reg_date, 'yyyy-mm-dd hh:mi:ss' ) regdate from BOARD 
+		order by regdate desc </select> -->
+	
+	<select id="getList" resultMap="boardResult">
+		SELECT SEQ, TITLE, WRITER, CONTENT, to_char(regdate, 'yyyy-mm-dd hh:mi:ss') reg_date,
+		CNT, ID FROM BOARD ORDER BY REG_DATE DESC
+	</select>
+
+<!-- 	<searchnamelist id="searchNameList" resultMap="BOARDResult"> -->
+<!-- SELECT NO, NAME, CONTENT, PASSWORD, to_char(reg_date, 'yyyy/mm/dd') FROM BOARD WHERE CONTENT LIKE ?"; -->
+<!-- 	</searchnamelist> -->
+	
+<!-- 	<searchcontentlist id="searchContentList" resultMap="BOARDResult"> -->
+<!-- 		SELECT NO, NAME, CONTENT, PASSWORD, to_char(reg_date, 'yyyy/mm/dd')  -->
+<!-- 		FROM BOARD WHERE NAME LIKE ?"; -->
+<!-- 	</searchcontentlist> -->
+
+	<select id="searchNameList" resultMap="boardResult">
+		SELECT no, name, content,
+		password, to_char(regdate, 'yyyy-mm-dd hh:mi:ss' ) reg_date
+		from BOARD where name like #{keyword} order by reg_date desc
+	</select>
+
+
+	<select id="searchContentList" resultMap="boardResult">
+		SELECT no, name, content,
+		password, to_char(regdate, 'yyyy-mm-dd hh:mi:ss' ) reg_date
+		from BOARD where content like #{keyword} order by reg_date desc
+	</select>
+
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UsersDAO">
+
+	<resultMap type="users" id="usersResult">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="role" column="role" />
+		<result property="password" column="password" />
+	</resultMap>
+
+	<insert id="insert">
+		INSERT INTO USERS VALUES (#{id}, #{name}, #{role}, #{password})
+	</insert>
+
+	<update id="update">
+		UPDATE USERS SET CONTENT = #{content}, name =
+		#{name}
+		where No = #{no} AND PASSWORD = #{password}
+	</update>
+
+	<select id="selectOne" parameterType="String" resultMap="usersResult">
+		SELECT ID, NAME, ROLE, PASSWORD FROM USERS WHERE ID = #{id}
+	</select>
+
+
+	<delete id="delete">
+		DELETE FROM USERS WHERE ID = #{id} 
+	</delete>
+	
+	<!-- <select id="getList" resultType="guestbook"> SELECT no, name, content, 
+		password, to_char(reg_date, 'yyyy-mm-dd hh:mi:ss' ) regdate from guestbook 
+		order by regdate desc </select> -->
+	
+	<select id="getList" resultMap="usersResult">
+		SELECT no, name, content,
+		password, to_char(reg_date, 'yyyy-mm-dd hh:mi:ss' ) regdate from
+		guestbook order by reg_date desc
+	</select>
+
+
+<!-- 	<select id="searchNameList" resultMap="usersResult"> -->
+<!-- 		SELECT no, name, content, -->
+<!-- 		password, to_char(reg_date, 'yyyy-mm-dd hh:mi:ss' ) regdate -->
+<!-- 		from guestbook where name like #{keyword} order by reg_date desc -->
+<!-- 	</select> -->
+
+
+<!-- 	<select id="searchContentList" resultMap="usersResult"> -->
+<!-- 		SELECT no, name, content, -->
+<!-- 		password, to_char(reg_date, 'yyyy-mm-dd hh:mi:ss' ) regdate -->
+<!-- 		from guestbook where content like #{keyword} order by reg_date desc -->
+<!-- 	</select> -->
+
+</mapper>
