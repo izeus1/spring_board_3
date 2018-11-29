@@ -1,5 +1,8 @@
 package com.javalec.mysite.controller;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -109,5 +112,14 @@ public class UsersController {
 //		
 //		return "updateform.jsp"; 
 //	}
+
+	@RequestMapping("/logout.do") //로그아웃 추가
+	public String logoutUsers(HttpSession session){
+		System.out.println("logout.do exe");
+//		session = req.getSession();
+		session.invalidate();
+		
+		return "login.jsp";
+	}
 	
 }
