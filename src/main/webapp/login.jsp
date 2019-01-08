@@ -119,18 +119,14 @@ input[type="submit"]:active {
   box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #31524d, 0px 5px 3px #999;
 }
 
-
-
-
 </style>
 
 <title>로그인</title>
 </head>
 
-
 <body>
 	<center>
-		<h1>로그인</h1>
+		<h3>로그인</h3>
 	</center>
 
 	<div class="login">

@@ -20,7 +20,9 @@
 				<tr>
 					<td width=20%>제목</td>
 					
-					<td>&nbsp;&nbsp;<input name="title" type="text" 
+<!-- 					type="text" -->
+					
+					<td>&nbsp;&nbsp;<input name="title"  
 						disabled="disabled" value="${selectone.title}"/></td>
 				</tr>
 				<tr>
@@ -31,7 +33,8 @@
 				<tr>
 					<td>내용</td>
 					<td>&nbsp;&nbsp;<textarea name="content" cols="70" rows="10"
-							disabled="disabled">${selectone.content}</textarea>
+							disabled="disabled"
+							>${selectone.content}</textarea>
 					</td>
 				</tr>
 				<tr>
